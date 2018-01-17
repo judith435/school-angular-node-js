@@ -1,0 +1,38 @@
+{
+  "name": "school-angular-node-js",
+  "version": "1.0.0",
+  "description": "school project using angular client & node.js server",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/judith435/school-angular-node-js.git"
+  },
+  "keywords": [
+    "angular",
+    "node.js",
+    "Judith",
+    "Ilson",
+    "fullstack"
+  ],
+  "author": "Judith Ilson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/judith435/school-angular-node-js/issues"
+  },
+  "homepage": "https://github.com/judith435/school-angular-node-js#readme",
+  "dependencies": {
+    "angular": "^1.6.8",
+    "angular-route": "^1.6.8",
+    "body-parser": "^1.18.2",
+    "bootstrap": "^3.3.7",
+    "express": "^4.16.2",
+    "jquery": "^3.2.1",
+    "mysql": "^2.15.0"
+  },
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  }
+}

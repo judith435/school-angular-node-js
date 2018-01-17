@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html  ng-app='school-app'>
+    <head>
+        <title>Coding School</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="../jquery/dist/jquery.min.js"></script>
+        <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css">
+        <script src="../bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="../angular/angular.min.js"></script>
+        <script src="../angular-route/angular-route.min.js"></script>
+        <!-- site less file placed after bootstrap files to enable overriding of bootstrap styles --> 
+        <link rel="stylesheet/less" type="text/css" href="styles/style.less" />
+        <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js"></script>
+        <script src="app.js"></script>
+        <script src="config.js"></script>
+        <script src="login/login.controller.js"></script>  
+        <script src="login/logout.controller.js"></script>  
+        <!-- <script src="suppliers/suppliers.controller.js"></script> 
+        <script src="Services/productService.js"></script>
+        <script src="Services/supplierService.js"></script>
+        <script src="Services/categoryService.js"></script> -->
+    </head>
+    <body>
+        <header>
+            <nav id="school-navigation" class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <img src="images/lego_school.png" class="img-fluid img-thumbnail"  width="205" height="75" alt="School Logo">
+                    </div>
+                    <ul class="nav navbar-nav">
+                        <li><a id="school-link" class="hide" href="#!school">School</a></li>
+                        <li><a id="administration-link" class="hide" href="#!administration">Administration</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav pull-right">
+                        <div class="info-row-navigation">
+                            <div class="info-container">
+                                <label id="admr-summary"></label>
+                                <a id="logout-link" class="logout-link hide" href="#!logout">Logout</a>
+                            </div>
+                            <img id="admr-image" src="" class="img-fluid img-thumbnail hide"  width="66" height="75">
+                        </div>
+                    </ul>
+                </div>
+            </nav> 
+        </header>
+        <div ng-view></div>
+    </body>
+</html>
+
+<!-- 
+<li><a href='#!showProducts'>Show Products</a></li>
+<li><a href='#!addProduct'>Add Product</a></li> -->
