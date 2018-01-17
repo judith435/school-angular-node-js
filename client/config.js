@@ -4,7 +4,7 @@ schoolApp.config(function($routeProvider) {
         templateUrl: 'login/home.html',
     })
     .when('/school', {
-        templateUrl: 'school/schoolMain.html'
+        templateUrl: 'school/school.html'
     })
     .when('/administration', {
         templateUrl: 'administration/administrationMain.html'

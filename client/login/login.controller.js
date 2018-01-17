@@ -1,4 +1,4 @@
-schoolApp.controller('loginController', function handleSchoolLoad($scope) {
+schoolApp.controller('loginController', function handleHomeLoad($scope) {
 
     //angular.element(document.querySelector("#txtInput")).addClass("customclass");
     //simulate that admin logged in

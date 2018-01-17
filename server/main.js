@@ -1,7 +1,8 @@
 var express = require('express');
 var bodyParser = require("body-parser");
 
-// var apiProducts = require('./api/productAPI.js');
+var apiCourse = require('./api/courseAPI.js');
+var apiStudent = require('./api/studentAPI.js');
 // var apiSuppliers = require('./api/supplierAPI.js');
 // var apiCategories = require('./api/categoryAPI.js');
 
@@ -25,7 +26,9 @@ app.get('/', function (req, res) {
    
 });
 
-// app.get('/product', apiProducts.getProducts);
+app.get('/course', apiCourse.getCourses);
+app.get('/student', apiStudent.getSudents);
+
 // app.get('/product/duplicate', apiProducts.checkDuplicateProduct);
 // app.get('/supplier', apiSuppliers.getSuppliers);
 // app.get('/supplier/ddl', apiSuppliers.getSuppliersDDL);
