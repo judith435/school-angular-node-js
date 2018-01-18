@@ -8,3 +8,6 @@ function getCourses(req, res) {
         res.end(JSON.stringify(courses));
     })
 }
+
+
+module.exports.getCourses = getCourses;

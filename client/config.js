@@ -1,3 +1,9 @@
+schoolApp.constant('configSettings', {
+    'schoolApi': 'http://localhost:8082',
+    'adminImagePath': 'settingValue'
+ }); 
+
+
 schoolApp.config(function($routeProvider) {
     $routeProvider
     .when('/', {

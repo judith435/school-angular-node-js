@@ -5,10 +5,27 @@
                 <table class="table table-hover table-responsive">
                     <thead>
                         <tr>
-                            <th class="text-left th-height">Courses<button id="btnAddCourse" class="add-button">+</button></th>
+                            <th class="text-left th-height">Courses<button  class="add-button">+</button></th>
                         </tr>
                     </thead>
-                    <tbody id='courses'>
+                    <tbody>
+                        <tr ng-repeat="course in courses"> 
+                            <!-- place all course values as non-display field in table row  => so all course's data is accessible in js -->
+                            <!-- <td id="course-name"                    class="hide">{{course-name}}</td>
+                            <td id="course-id"                      class="hide">{{course-id}}</td>
+                            <td id="course-description"             class="hide">{{course-description}}</td>
+                            <td id="number-of-students-for-course"  class="hide">{{number-of-students-for-course}}</td>
+                            <td id="student-ids"                    class="hide">{{student-ids}}</td> -->
+                            <td>
+                                <div class="info-row-school-aside">
+                                    <canvas data-canvas-id={{course.courseID}} class="img-fluid info-minor" width="33" height="42"></canvas>
+                                    <div class="info-container">
+                                        <span class="text-left">{{course.courseName}}</span>
+                                        <span class="text-left">no of students&#58;&nbsp;{{course.numberOfStudentsForCourse}}</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </section>
@@ -16,10 +33,27 @@
                 <table class="table table-hover table-responsive">
                     <thead>
                         <tr>
-                            <th class="text-left th-height">Students<button  id="btnAddStudent" class="add-button">+</button></th>
+                            <th class="text-left th-height">Students<button class="add-button">+</button></th>
                         </tr>
                     </thead>
-                    <tbody id='students'>
+                    <tbody>
+                        <tr ng-repeat="student in students"> 
+                            <!-- place all student values as non-display field in table row  => so all student's data is accessible in js
+                            <td id="student-id"        class="hide">{{student-id}}</td>
+                            <td id="student-name"      class="hide">{{student-name}}</td>
+                            <td id="student-phone"     class="hide">{{student-phone}}</td>
+                            <td id="student-email"     class="hide">{{student-email}}</td>
+                            <td id="student-courses"   class="hide">{{student-courses}}</td> -->
+                            <td>
+                                <div class="info-row-school-aside">
+                                    <canvas data-canvas-id={{student.studentID}} class="img-fluid info-minor" width="33" height="42"></canvas>
+                                    <div class="info-container">
+                                        <span class="text-left">{{student.studentName}}</span>
+                                        <span class="text-left">{{student.studentPhone}}</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </section>
@@ -27,7 +61,7 @@
     </aside>
     <main id="main-container" class="main">
         <h1>Welcome to lego education - School</h1>
-        <h2 id="totalCourses"></h2>
-        <h2 id="totalStudents"></h2>  
+        <h2>{{totalCourses}}</h2>
+        <h2>{{totalStudents}}</h2>  
     </main>
 </div>  

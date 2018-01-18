@@ -1,7 +1,7 @@
 schoolApp.service('courseService', function($http) {
     
-    this.getCourses = function (success) { 
-        $http.get('http://localhost:8081/course',{}).then(success, error);
+    this.getCourses = function (configSettings, success) { 
+        $http.get(configSettings.schoolApi + '/course',{}).then(success, error);
     }
 
     // this.checkDuplicateProduct = function (prod, success, error) { 

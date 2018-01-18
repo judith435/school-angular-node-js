@@ -3,8 +3,6 @@ var bodyParser = require("body-parser");
 
 var apiCourse = require('./api/courseAPI.js');
 var apiStudent = require('./api/studentAPI.js');
-// var apiSuppliers = require('./api/supplierAPI.js');
-// var apiCategories = require('./api/categoryAPI.js');
 
 var fs = require('fs');
 
@@ -27,7 +25,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/course', apiCourse.getCourses);
-app.get('/student', apiStudent.getSudents);
+app.get('/student', apiStudent.getStudents);
 
 // app.get('/product/duplicate', apiProducts.checkDuplicateProduct);
 // app.get('/supplier', apiSuppliers.getSuppliers);

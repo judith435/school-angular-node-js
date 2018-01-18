@@ -1,7 +1,7 @@
 schoolApp.service('studentService', function($http) {
     
-    this.getStudents = function (success) { 
-        $http.get('http://localhost:8082/student',{}).then(success, error);
+    this.getStudents = function (configSettings, success) { 
+        $http.get(configSettings.schoolApi + '/student',{}).then(success, error);
     }
 
     // this.checkDuplicateProduct = function (prod, success, error) { 

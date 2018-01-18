@@ -8,3 +8,5 @@ function getStudents(req, res) {
         res.end(JSON.stringify(students));
     })
 }
+
+module.exports.getStudents = getStudents;
