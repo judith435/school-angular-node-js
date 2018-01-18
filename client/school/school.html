@@ -9,7 +9,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="course in courses"> 
+                        <tr ng-repeat="course in courses" on-finish-render="ngRepeatFinished"> 
                             <!-- place all course values as non-display field in table row  => so all course's data is accessible in js -->
                             <!-- <td id="course-name"                    class="hide">{{course-name}}</td>
                             <td id="course-id"                      class="hide">{{course-id}}</td>
@@ -18,7 +18,8 @@
                             <td id="student-ids"                    class="hide">{{student-ids}}</td> -->
                             <td>
                                 <div class="info-row-school-aside">
-                                    <canvas data-canvas-id={{course.courseID}} class="img-fluid info-minor" width="33" height="42"></canvas>
+                                    <!-- <canvas data-canvas-id={{course.courseID}} class="img-fluid info-minor" width="33" height="42"></canvas> -->
+                                    <canvas id=canvas-course-{{course.courseID}} class="img-fluid info-minor" width="33" height="42"></canvas>
                                     <div class="info-container">
                                         <span class="text-left">{{course.courseName}}</span>
                                         <span class="text-left">no of students&#58;&nbsp;{{course.numberOfStudentsForCourse}}</span>
@@ -37,7 +38,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="student in students"> 
+                        <tr ng-repeat="student in students" on-finish-render="ngRepeatFinished"> 
                             <!-- place all student values as non-display field in table row  => so all student's data is accessible in js
                             <td id="student-id"        class="hide">{{student-id}}</td>
                             <td id="student-name"      class="hide">{{student-name}}</td>
@@ -46,7 +47,7 @@
                             <td id="student-courses"   class="hide">{{student-courses}}</td> -->
                             <td>
                                 <div class="info-row-school-aside">
-                                    <canvas data-canvas-id={{student.studentID}} class="img-fluid info-minor" width="33" height="42"></canvas>
+                                    <canvas id={{student.studentID}} class="img-fluid info-minor" width="33" height="42"></canvas>
                                     <div class="info-container">
                                         <span class="text-left">{{student.studentName}}</span>
                                         <span class="text-left">{{student.studentPhone}}</span>
