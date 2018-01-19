@@ -16,7 +16,6 @@ schoolApp.controller('schoolController', function handleSchoolLoad($scope, confi
     function loadCourseCanvas() {
         $scope.courses.forEach(function (course) {
             var drawingCanvas = document.getElementById('canvas-course-' + course.courseID);
-           // alert ('$location.path() ' + $location.path());
             canvasService.setCanvas(drawingCanvas, configSettings.courseImagePath + course.courseID, 'schoolAside');
         });
     }

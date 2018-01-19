@@ -1,8 +1,8 @@
 schoolApp.constant('configSettings', {
     'schoolApi': 'http://localhost:8082',
-    'adminImagePath': 'imagi/admins/image_for_admin_id_',
-    'courseImagePath': 'imagi/courses/image_for_course_id_',
-    'studentImagePath': 'imagi/students/image_for_student_id_'
+    'adminImagePath': 'image_for_admin_id_',
+    'courseImagePath': 'image_for_course_id_',
+    'studentImagePath': 'image_for_student_id_'
     // 'adminImagePath': '../images/admins/image_for_admin_id_',
     // 'courseImagePath': '../images/courses/image_for_course_id_',
     // 'studentImagePath': '../images/students/image_for_student_id_'

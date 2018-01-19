@@ -13,7 +13,7 @@ schoolApp.service('canvasService', function() {
             imageObj.onload = function() {
                 context.drawImage(imageObj, 0, 0, canvasSize[size][0], canvasSize[size][1]);
             };
-            imageObj.src = 'image_for_course_id_1.jpg';//imgPath;
+            imageObj.src = imgPath + '.jpg'; 
     }
 
   

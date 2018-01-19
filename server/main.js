@@ -10,6 +10,9 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static('../client'));
+app.use(express.static('../images/admins'));
+app.use(express.static('../images/courses'));
+app.use(express.static('../images/students'));
 app.use(express.static('../node_modules'));
 
 // Listen to '/' in GET Verb methods - serve the main Angular index.html file
