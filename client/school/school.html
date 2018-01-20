@@ -1,4 +1,4 @@
-<div class="flex-container"  ng-controller="schoolController">
+<!-- <div class="flex-container"  ng-controller="schoolController">
     <aside id="side-container" class="aside bordered-right">
         <div class="flex-container aside_table">
             <section class="courses-flex">
@@ -9,16 +9,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="course in courses" on-finish-render="ngRepeatFinished"> 
-                            <!-- place all course values as non-display field in table row  => so all course's data is accessible in js -->
-                            <!-- <td id="course-name"                    class="hide">{{course-name}}</td>
-                            <td id="course-id"                      class="hide">{{course-id}}</td>
-                            <td id="course-description"             class="hide">{{course-description}}</td>
-                            <td id="number-of-students-for-course"  class="hide">{{number-of-students-for-course}}</td>
-                            <td id="student-ids"                    class="hide">{{student-ids}}</td> -->
+                        <tr ng-repeat="course in courses" on-finish-render="ngRepeatFinished" ng-click="courseSelected(course);"> 
                             <td>
                                 <div class="info-row-school-aside">
-                                    <canvas id=canvas-course-{{course.courseID}} class="img-fluid info-minor" width="33" height="42"></canvas>
+                                    <canvas id=canvas-course-{{course.id}} class="img-fluid info-minor" width="33" height="42"></canvas>
                                     <div class="info-container">
                                         <span class="text-left">{{course.courseName}}</span>
                                         <span class="text-left">no of students&#58;&nbsp;{{course.numberOfStudentsForCourse}}</span>
@@ -37,16 +31,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="student in students" on-finish-render="ngRepeatFinished"> 
-                            <!-- place all student values as non-display field in table row  => so all student's data is accessible in js
-                            <td id="student-id"        class="hide">{{student-id}}</td>
-                            <td id="student-name"      class="hide">{{student-name}}</td>
-                            <td id="student-phone"     class="hide">{{student-phone}}</td>
-                            <td id="student-email"     class="hide">{{student-email}}</td>
-                            <td id="student-courses"   class="hide">{{student-courses}}</td> -->
+                        <tr ng-repeat="student in students" on-finish-render="ngRepeatFinished"  ng-click="studentSelected(student);" > 
                             <td>
                                 <div class="info-row-school-aside">
-                                    <canvas id={{student.studentID}} class="img-fluid info-minor" width="33" height="42"></canvas>
+                                    <canvas id=canvas-student-{{student.id}} class="img-fluid info-minor" width="33" height="42"></canvas>
                                     <div class="info-container">
                                         <span class="text-left">{{student.studentName}}</span>
                                         <span class="text-left">{{student.studentPhone}}</span>
@@ -64,4 +52,4 @@
         <h2>{{totalCourses}}</h2>
         <h2>{{totalStudents}}</h2>  
     </main>
-</div>  
+</div>   -->

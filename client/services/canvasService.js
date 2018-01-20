@@ -1,5 +1,5 @@
 schoolApp.service('canvasService', function() {
-    
+    var self = this;
     var canvasSize = {
         regular: [80, 100],   
         small: [40, 50],
@@ -13,18 +13,15 @@ schoolApp.service('canvasService', function() {
             imageObj.onload = function() {
                 context.drawImage(imageObj, 0, 0, canvasSize[size][0], canvasSize[size][1]);
             };
-            imageObj.src = imgPath + '.jpg';  //'image_for_course_id_1.jpg';
+            imageObj.src = imgPath + '.jpg';
     }
 
-  
-    // this.loadCanvasList = function (canvasList, imagePath, size) {
-    //         for (let i = 0; i < canvasList.length; i++) {
-    //             let canvas = canvasList[i];
-    //             var dtForceReload = new Date();//way to force browser to reload picture after update of picture
-    //             var imgPath = imagePath + $(canvas).data("canvas-id") + ".jpg?" + dtForceReload.getTime();
-    //             this.setCanvas(canvas, imgPath, size);
-    //         }
-    // }
+    this.loadCanvasList =  function (items, canvasID , imagePath, asideName) {
+        items.forEach(function (item) {
+            var drawingCanvas = document.getElementById(canvasID + item.id);
+          //  console.log('id:  ' + item.id + '  drawingCanvas' + JSON.stringify(drawingCanvas));
+            self.setCanvas(drawingCanvas, imagePath + item.id, asideName);
+        });
+    }
 });
 
-//common.loadCanvasList($("#courses canvas"), app.courseImagePath, "schoolAside");

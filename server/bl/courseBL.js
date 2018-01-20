@@ -4,7 +4,7 @@ var model = require('../models/courseModel');
 
 
 function getCourses(callback) {
-    dal.executeQuery('school', 'get_courses', '',function(err, rows) {
+    dal.executeQuery('coding-school', 'get_courses', '',function(err, rows) {
         if (err) {
             callback(err);
         }

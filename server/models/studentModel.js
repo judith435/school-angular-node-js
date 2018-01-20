@@ -1,5 +1,5 @@
 function Student(student) {
-    this.studentID = student['studentID'];
+    this.id = student['id'];
     this.studentName = student['studentName'];
     this.studentPhone = student['studentPhone'];
     this.studentEmail = student['studentEmail'];

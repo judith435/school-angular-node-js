@@ -1,5 +1,9 @@
 schoolApp.controller('schoolController', function handleSchoolLoad($scope, configSettings, courseService, studentService, canvasService) {
 
+   $scope.courseAsideTemplate = '../courseAside.html';
+   $scope.studentAsideTemplate = '../studentAside.html';
+   $scope.mainTemplate = '../schoolMain.html';
+
     getCourses();
     getStudents();
 
@@ -12,30 +16,6 @@ schoolApp.controller('schoolController', function handleSchoolLoad($scope, confi
         });
     }
 
-    
-    function loadCourseCanvas() {
-        $scope.courses.forEach(function (course) {
-            var drawingCanvas = document.getElementById('canvas-course-' + course.courseID);
-            canvasService.setCanvas(drawingCanvas, configSettings.courseImagePath + course.courseID, 'schoolAside');
-        });
-    }
-
-    // var drawingCanvas = document.getElementById($scope.idImage);
-    // var context = drawingCanvas.getContext('2d');
-    // context.drawImage($scope.idImage, 0, 0, 40, 50);
-
-  //  context.drawImage($scope.idImage, $scope.coordinate.x, $scope.coordinate.y, $scope.coordinate.w, $scope.coordinate.h);
-    // function setCanvas(canvas, imgPath, size) {
-    //     var context = canvas.getContext("2d");
-    //     var imageObj = new Image();
-    //     imageObj.onload = function() {
-    //           context.drawImage(imageObj, 0, 0, canvasSize[size][0], canvasSize[size][1]);
-    //     };
-    //     imageObj.src = imgPath;
-    // }
-
-
-
     function getStudents() {
         studentService.getStudents(configSettings, function(students) {
             const stdnts = students.data;
@@ -45,10 +25,20 @@ schoolApp.controller('schoolController', function handleSchoolLoad($scope, confi
         });
     }
 
-
     $scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
-        loadCourseCanvas();
+        canvasService.loadCanvasList($scope.courses, 'canvas-course-' , configSettings.courseImagePath, 'schoolAside'); 
+        canvasService.loadCanvasList($scope.students, 'canvas-student-' , configSettings.studentImagePath, 'schoolAside'); 
     });
+
+
+    $scope.courseSelected = function(course){
+        $scope.selectedCourse = course;
+        $scope.mainTemplate = '../cud-course.html';
+    }
+
+    $scope.studentSelected = function(student){
+        // alert(JSON.stringify(student));
+    }
 
 
 });

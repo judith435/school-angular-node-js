@@ -10,6 +10,8 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static('../client'));
+app.use(express.static('../client/school'));
+app.use(express.static('../client/course'));
 app.use(express.static('../images/admins'));
 app.use(express.static('../images/courses'));
 app.use(express.static('../images/students'));
