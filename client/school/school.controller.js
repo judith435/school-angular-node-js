@@ -33,8 +33,13 @@ schoolApp.controller('schoolController', function handleSchoolLoad($scope, confi
 
     $scope.courseSelected = function(course){
         $scope.selectedCourse = course;
-       // $scope.mainTemplate = '../cud-course.html';
         $scope.mainTemplate = '../view-course.html';
+        $scope.$broadcast('courseSelected');
+    }
+
+    $scope.addCourse = function(){
+        $scope.updateCourse = false;
+        $scope.mainTemplate = '../cud-course.html';
     }
 
     $scope.studentSelected = function(student){
