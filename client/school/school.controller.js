@@ -1,4 +1,4 @@
-schoolApp.controller('schoolController', function handleSchoolLoad($scope, configSettings, courseService, studentService, canvasService) {
+schoolApp.controller('schoolController', function handleSchoolLoad($rootScope, $scope, configSettings, courseService, studentService, canvasService) {
 
    $scope.courseAsideTemplate = '../courseAside.html';
    $scope.studentAsideTemplate = '../studentAside.html';
@@ -32,9 +32,8 @@ schoolApp.controller('schoolController', function handleSchoolLoad($scope, confi
 
 
     $scope.courseSelected = function(course){
-        $scope.selectedCourse = course;
         $scope.mainTemplate = '../view-course.html';
-        $scope.$broadcast('courseSelected');
+        $rootScope.$broadcast('courseSelected', {course: course});
     }
 
     $scope.addCourse = function(){
