@@ -18,14 +18,13 @@
 <div class="form-group row" ng-if="studentsForCourse">
     <div  class="col-xs-10 col-sm-10 col-md-9 col-lg-9 text-left main_table">
         <table class="table table-hover table-responsive">
-            <tbody>
-                <!-- <tr  ng-repeat="studentForCourse in studentsForCourse" on-finish-render="studentsForCourseLoaded"> -->
-                <tr ng-repeat="studentForCourse in studentsForCourse" >
+            <tbody> 
+                <tr ng-repeat="studentForCourse in studentsForCourse">
                     <td>
                         <div class="info-row-minor">
-                            <!-- <canvas id=canvas-student-{{studentForCourse.id}} class="img-fluid info-minor" width="40" height="50">
-                            </canvas> -->
-                            <img ng-src="studentForCourse.imagePath" class="img-fluid info-minor" width="40" height="50"> 
+                            <!-- <canvas id=canvas-student-for-course-{{studentForCourse.id}} class="img-fluid info-minor" width="40" height="50">
+                            </canvas>   -->
+                            <img ng-src="{{studentForCourse.imagePath}}" class="img-fluid info-minor" width="40" height="50"> 
                             <div class="info-container">
                                 <label class="text-left">{{studentForCourse.name}}</label>
                             </div>

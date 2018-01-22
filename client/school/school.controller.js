@@ -25,7 +25,7 @@ schoolApp.controller('schoolController', function handleSchoolLoad($rootScope, $
         });
     }
 
-    $scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
+    $scope.$on('ngSchoolRepeatFinished', function(ngSchoolRepeatFinishedEvent) {
         canvasService.loadCanvasList($scope.courses, 'canvas-course-' , configSettings.courseImagePath, 'schoolAside'); 
         canvasService.loadCanvasList($scope.students, 'canvas-student-' , configSettings.studentImagePath, 'schoolAside'); 
     });
@@ -34,7 +34,13 @@ schoolApp.controller('schoolController', function handleSchoolLoad($rootScope, $
     $scope.courseSelected = function(course){
 
         $scope.studentsForCourse = [];
-        
+        $scope.course = course;
+        buildStudentsForCourse(course);
+        $scope.mainTemplate = '../view-course.html';
+        $rootScope.$broadcast('handleCourseSelection', {course: course, studentsForCourse: $scope.studentsForCourse});
+    }
+
+    function buildStudentsForCourse(course) {
         var students = course.studentIDs.split(","); 
         students.forEach(function (studentID) {
             let student = $.grep( $scope.students, function(e){ 
@@ -42,13 +48,9 @@ schoolApp.controller('schoolController', function handleSchoolLoad($rootScope, $
             });
             $scope.studentsForCourse.push({id:studentID, 
                 name:student[0].studentName,
-                imagePath: configSettings.studentImagePath + studentID });
+                imagePath: configSettings.studentImagePath + studentID + '.jpg' });
         });
-        console.log(JSON.stringify($scope.studentsForCourse));
-
-        $scope.course = course;
-        $scope.mainTemplate = '../view-course.html';
-        $rootScope.$broadcast('handleCourseSelection', {course: course, studentsForCourse: $scope.studentsForCourse});
+       // console.log(JSON.stringify($scope.studentsForCourse));
     }
 
     $scope.addCourse = function(){

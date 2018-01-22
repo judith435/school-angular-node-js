@@ -17,11 +17,11 @@ schoolApp.service('canvasService', function() {
             imageObj.src = imgPath + '.jpg';
     }
 
-    this.loadCanvasList =  function (items, canvasID , imagePath, asideName) {
+    this.loadCanvasList =  function (items, canvasID , imagePath, size) {
         items.forEach(function (item) {
             var drawingCanvas = document.getElementById(canvasID + item.id);
           //  console.log('id:  ' + item.id + '  drawingCanvas' + JSON.stringify(drawingCanvas));
-            self.setCanvas(drawingCanvas, imagePath + item.id, asideName);
+            self.setCanvas(drawingCanvas, imagePath + item.id, size);
         });
     }
 });

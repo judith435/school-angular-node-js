@@ -5,7 +5,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="course in courses" on-finish-render="ngRepeatFinished" ng-click="courseSelected(course)"> 
+        <tr ng-repeat="course in courses" on-finish-school-render="ngSchoolRepeatFinished" ng-click="courseSelected(course)"> 
             <td>
                 <div class="info-row-school-aside">
                     <canvas id=canvas-course-{{course.id}} class="img-fluid info-minor" width="33" height="42"></canvas>
