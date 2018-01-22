@@ -9,6 +9,7 @@ schoolApp.service('canvasService', function() {
     
     this.setCanvas = function (canvas, imgPath, size) {
             var context = canvas.getContext("2d");
+            context.clearRect(0, 0, canvas.width, canvas.height);
             var imageObj = new Image();
             imageObj.onload = function() {
                 context.drawImage(imageObj, 0, 0, canvasSize[size][0], canvasSize[size][1]);

@@ -32,8 +32,23 @@ schoolApp.controller('schoolController', function handleSchoolLoad($rootScope, $
 
 
     $scope.courseSelected = function(course){
+
+        $scope.studentsForCourse = [];
+        
+        var students = course.studentIDs.split(","); 
+        students.forEach(function (studentID) {
+            let student = $.grep( $scope.students, function(e){ 
+                return e.id ===  parseInt(studentID); 
+            });
+            $scope.studentsForCourse.push({id:studentID, 
+                name:student[0].studentName,
+                imagePath: configSettings.studentImagePath + studentID });
+        });
+        console.log(JSON.stringify($scope.studentsForCourse));
+
+        $scope.course = course;
         $scope.mainTemplate = '../view-course.html';
-        $rootScope.$broadcast('courseSelected', {course: course});
+        $rootScope.$broadcast('handleCourseSelection', {course: course, studentsForCourse: $scope.studentsForCourse});
     }
 
     $scope.addCourse = function(){
