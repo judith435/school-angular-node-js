@@ -1,4 +1,7 @@
 schoolApp.controller('editCourseController', function($rootScope, $scope, $timeout, configSettings, courseService, canvasService) {
-    
-    console.log('@@@@@@ in editCourseController');
+    //$scope.course = $scope.updateCourse ?  $scope.course : '' ;
+
+    //alert('@@@@@@ in editCourseController $scope.course=' + $scope.course + '===');
+
+   // console.log('@@@@@@ in editCourseController');
 });

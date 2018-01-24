@@ -1,9 +1,20 @@
-schoolApp.controller('schoolController', function handleSchoolLoad($rootScope, $scope, configSettings, courseService, studentService, canvasService) {
+schoolApp.controller('schoolController', function handleSchoolLoad($rootScope, 
+    $scope, 
+    $templateRequest,
+    $compile, 
+    configSettings, 
+    courseService, 
+    studentService, 
+    canvasService) {
 
-   $scope.courseAsideTemplate = '../courseAside.html';
-   $scope.studentAsideTemplate = '../studentAside.html';
-   $scope.mainTemplate = '../schoolMain.html';
+    $rootScope.$on('$includeContentLoaded', function(){
+      //  alert ('schoolController includeContentLoaded');
+    });
 
+
+    $scope.courseAsideTemplate = '../courseAside.html';
+    $scope.studentAsideTemplate = '../studentAside.html';
+    $scope.mainTemplate = '../schoolMain.html';
     getCourses();
     getStudents();
 
@@ -35,12 +46,18 @@ schoolApp.controller('schoolController', function handleSchoolLoad($rootScope, $
 
         $scope.studentsForCourse = [];
         $scope.course = course;
-        buildStudentsForCourse(course);
-        $scope.mainTemplate = '../view-course.html';
-        $rootScope.$broadcast('handleCourseSelection', {course: course, studentsForCourse: $scope.studentsForCourse});
+        if (course.studentIDs !== '') {
+            buildStudentsForCourse(course);
+        }
+       // $scope.mainTemplate = '../view-course.html';
+        $templateRequest("../view-course.html").then(function(html){
+            var template = $compile(html)($scope);
+            angular.element(document.querySelector('#mainPlaceHolder')).empty().append(template);
+            $rootScope.$broadcast('handleCourseSelection', {course: course, studentsForCourse: $scope.studentsForCourse});
+        });
     }
 
-    function buildStudentsForCourse(course) {
+    function buildStudentsForCourse(course) { //TODO: move to service because connects 2 separate controllers
         var students = course.studentIDs.split(","); 
         students.forEach(function (studentID) {
             let student = $.grep( $scope.students, function(e){ 
@@ -54,8 +71,13 @@ schoolApp.controller('schoolController', function handleSchoolLoad($rootScope, $
     }
 
     $scope.addCourse = function(){
-        $scope.updateCourse = false;
-        $scope.mainTemplate = '../cud-course.html';
+       $rootScope.updateCourse = false;
+       $scope.course = '';
+       //$scope.mainTemplate = '../cud-course.html';
+        $templateRequest("../cud-course.html").then(function(html){
+            var template = $compile(html)($scope);
+            angular.element(document.querySelector('#mainPlaceHolder')).empty().append(template);
+        });
     }
 
     $scope.studentSelected = function(student){

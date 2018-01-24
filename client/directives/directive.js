@@ -10,13 +10,3 @@ schoolApp.directive('onFinishSchoolRender', function ($timeout) {
 		}
 	}
 });
-
-
-
-// link: function(scope, element){
-// 	$templateRequest("template.html").then(function(html){
-// 	   var template = angular.element(html);
-// 	   element.append(template);
-// 	   $compile(template)(scope);
-// 	});
-//  };

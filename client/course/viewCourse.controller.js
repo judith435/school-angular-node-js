@@ -1,5 +1,18 @@
-schoolApp.controller('viewCourseController', function($rootScope, $scope, $templateRequest,
-    $compile, $templateCache,   $timeout, configSettings, courseService, canvasService) {
+schoolApp.controller('viewCourseController', function($rootScope, 
+    $scope, 
+    $templateRequest,
+    $compile, 
+    $templateCache,   
+    $timeout, 
+    configSettings, 
+    courseService, 
+    canvasService) {
+
+    $rootScope.$on('$includeContentLoaded', function(){
+     //   alert ('viewCourseController includeContentLoaded');
+    });
+    
+
     setTemplate($scope.course, $scope.studentsForCourse);
 
     $rootScope.$on('handleCourseSelection', function(event, parms) {  
@@ -8,31 +21,23 @@ schoolApp.controller('viewCourseController', function($rootScope, $scope, $templ
     
     function setTemplate(course, studentsForCourse) {
 
-        $rootScope.selectedCourse = course;
-        $rootScope.courseSummary = $rootScope.selectedCourse.courseName + ', ' + $rootScope.selectedCourse.numberOfStudentsForCourse + ' students';
+        $scope.selectedCourse = course;
+        $rootScope.courseSummary = $scope.selectedCourse.courseName + ', ' + $scope.selectedCourse.numberOfStudentsForCourse + ' students';
 
         var drawingCanvas = document.getElementById('canvasCourse');
-        canvasService.setCanvas(drawingCanvas,  
-                                configSettings.courseImagePath + $rootScope.selectedCourse.id, 
-                                'regular'); 
+        // canvasService.setCanvas(drawingCanvas,  
+        //                         configSettings.courseImagePath + $scope.selectedCourse.id, 
+        //                         'regular'); 
         console.log(JSON.stringify(studentsForCourse));
     }
 
     $scope.editCourse = function(){
+        $scope.course = $scope.selectedCourse;
+        // $scope.mainTemplate = '../cud-course.html'; 
         $templateRequest("../cud-course.html").then(function(html){
             var template = $compile(html)($scope);
-            angular.element(document.querySelector('#mainPlaceHolder')).empty().replaceWith(template);
+            angular.element(document.querySelector('#mainPlaceHolder')).empty().append(template);
+            $rootScope.updateCourse = true;
         });
     }
 });
-
-//$( "#result" ).load( "ajax/test.html" );
-
-// link: function(scope, element){
-//     $templateRequest("template.html").then(function(html){
-//        var template = angular.element(html);
-//        element.append(template);
-//        $compile(template)(scope);
-//     });
-//  };
-
