@@ -1,4 +1,4 @@
-schoolApp.controller('viewCourseController', function($rootScope, $scope, 
+schoolApp.controller('viewCourseController', function($rootScope, $scope, $templateRequest,
     $compile, $templateCache,   $timeout, configSettings, courseService, canvasService) {
     setTemplate($scope.course, $scope.studentsForCourse);
 
@@ -19,12 +19,20 @@ schoolApp.controller('viewCourseController', function($rootScope, $scope,
     }
 
     $scope.editCourse = function(){
-    //    var template = $compile($templateCache.get('../cud-course.html'))($scope);
-       var template = $compile('../cud-course.html')($scope);
-      // element.html($compile('<div ng-include=\'enterprisesMenu.html\'></div>')(scope));   
-        angular.element(document.querySelector('#mainPlaceHolder')).append(template); //append your compiled element wherever you want
-       // $scope.mainTemplate = '../cud-course.html';
+        $templateRequest("../cud-course.html").then(function(html){
+            var template = $compile(html)($scope);
+            angular.element(document.querySelector('#mainPlaceHolder')).empty().replaceWith(template);
+        });
     }
 });
 
+//$( "#result" ).load( "ajax/test.html" );
+
+// link: function(scope, element){
+//     $templateRequest("template.html").then(function(html){
+//        var template = angular.element(html);
+//        element.append(template);
+//        $compile(template)(scope);
+//     });
+//  };
 
