@@ -53,7 +53,9 @@ schoolApp.controller('schoolController', function handleSchoolLoad($rootScope,
         $templateRequest("../view-course.html").then(function(html){
             var template = $compile(html)($scope);
             angular.element(document.querySelector('#mainPlaceHolder')).empty().append(template);
-            $rootScope.$broadcast('handleCourseSelection', {course: course, studentsForCourse: $scope.studentsForCourse});
+            $scope.$apply(function(){
+                $rootScope.$broadcast('handleCourseSelection', {course: course, studentsForCourse: $scope.studentsForCourse});
+            })
         });
     }
 

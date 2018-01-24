@@ -25,15 +25,17 @@ schoolApp.controller('viewCourseController', function($rootScope,
         $rootScope.courseSummary = $scope.selectedCourse.courseName + ', ' + $scope.selectedCourse.numberOfStudentsForCourse + ' students';
 
         var drawingCanvas = document.getElementById('canvasCourse');
-        // canvasService.setCanvas(drawingCanvas,  
-        //                         configSettings.courseImagePath + $scope.selectedCourse.id, 
-        //                         'regular'); 
+        if (drawingCanvas) {
+        canvasService.setCanvas(drawingCanvas,  
+                                configSettings.courseImagePath + $scope.selectedCourse.id, 
+                                'regular'); 
+        }
         console.log(JSON.stringify(studentsForCourse));
     }
 
     $scope.editCourse = function(){
         $scope.course = $scope.selectedCourse;
-        // $scope.mainTemplate = '../cud-course.html'; 
+       // $scope.mainTemplate = '../cud-course.html'; 
         $templateRequest("../cud-course.html").then(function(html){
             var template = $compile(html)($scope);
             angular.element(document.querySelector('#mainPlaceHolder')).empty().append(template);
