@@ -23,6 +23,7 @@ schoolApp.controller('viewCourseController', function($rootScope,
             var drawingCanvas = document.getElementById('canvasCourse');
             canvasService.setCanvas(drawingCanvas, configSettings.courseImagePath + $scope.selectedCourse.id,'regular'); 
             canvasService.loadCanvasList(studentsForCourse, 'canvas-student-for-course-' , configSettings.studentImagePath, 'small'); 
+            // canvasService.loadCanvasListX(studentsForCourse, 'studentsForCourse','canvas-student-for-course-' , configSettings.studentImagePath, 'small'); 
         });
         console.log(JSON.stringify(studentsForCourse));
     }

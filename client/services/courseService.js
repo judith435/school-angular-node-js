@@ -1,27 +1,28 @@
-schoolApp.service('courseService', function($http) {
+schoolApp.service('courseService', function($http, $q) {
     
     this.getCourses = function (configSettings, success) { 
         $http.get(configSettings.schoolApi + '/course',{}).then(success, error);
     }
 
-    // this.checkDuplicateProduct = function (prod, success, error) { 
-    //     $http({
-    //         url: 'http://localhost:8081/product/duplicate', 
-    //         method: 'GET',
-    //         params: { product: prod }
-    //      });
-    // }
-
-
-    // this.addProduct = function(prod, success, error) {
-    //     $http({
-    //         url: 'http://localhost:8081/product',
-    //         method: 'POST',
-    //         params: { product: prod }
-    //     }).then(success, error);
-    // }
 
     function error(response) {
-        alert("Sorry Error occured in $http: " + JSON.stringify(response));
+        alert("Sorry Error occured in courseService: " + JSON.stringify(response));
     }
+
+    this.buildStudentsForCourse = function(course, students) {
+        var studentsForCourse = [];
+        var studentsIDs = course.studentIDs.split(","); 
+        studentsIDs.forEach(function (studentID) {
+            let student = $.grep( students, function(e){ 
+                return e.id ===  parseInt(studentID); 
+            });
+            studentsForCourse.push({id:studentID, name:student[0].studentName});
+        });
+
+        var deferral = $q.defer(); 
+        deferral.resolve({studentsForCourse});
+        return deferral.promise;
+    }
+
 });
+

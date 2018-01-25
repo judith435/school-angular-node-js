@@ -43,30 +43,19 @@ schoolApp.controller('schoolController', function handleSchoolLoad($rootScope,
         $scope.course = course;
         if (course.studentIDs !== '') {
             buildStudentsForCourse(course);
+            // courseService.buildStudentsForCourse(course, $scope.students).then(function(studentsForCourse) {
+            //     $scope.studentsForCourse = studentsForCourse;
+            // });
         }
-       // $scope.mainTemplate = '../view-course.html';
         $templateRequest("../view-course.html").then(function(html){
             var template = $compile(html)($scope);
             angular.element(document.querySelector('#mainPlaceHolder')).empty().append(template);
             angular.element(function () {
                 $rootScope.$broadcast('handleCourseSelection', {course: course, studentsForCourse: $scope.studentsForCourse});
             });
-        
         });
     }
 
-    function buildStudentsForCourse(course) { //TODO: move to service because connects 2 separate controllers
-        var students = course.studentIDs.split(","); 
-        students.forEach(function (studentID) {
-            let student = $.grep( $scope.students, function(e){ 
-                return e.id ===  parseInt(studentID); 
-            });
-            $scope.studentsForCourse.push({id:studentID, 
-                name:student[0].studentName,
-                imagePath: configSettings.studentImagePath + studentID + '.jpg' });
-        });
-       // console.log(JSON.stringify($scope.studentsForCourse));
-    }
 
     $scope.addCourse = function(){
        $rootScope.updateCourse = false;
@@ -82,5 +71,16 @@ schoolApp.controller('schoolController', function handleSchoolLoad($rootScope,
         // alert(JSON.stringify(student));
     }
 
-
+    function buildStudentsForCourse(course) { //TODO: move to service because connects 2 separate controllers
+        var students = course.studentIDs.split(","); 
+        students.forEach(function (studentID) {
+            let student = $.grep( $scope.students, function(e){ 
+                return e.id ===  parseInt(studentID); 
+            });
+            $scope.studentsForCourse.push({id:studentID, 
+                name:student[0].studentName,
+                imagePath: configSettings.studentImagePath + studentID + '.jpg' });
+        });
+       // console.log(JSON.stringify($scope.studentsForCourse));
+    }
 });
