@@ -7,11 +7,6 @@ schoolApp.controller('schoolController', function handleSchoolLoad($rootScope,
     studentService, 
     canvasService) {
 
-    $rootScope.$on('$includeContentLoaded', function(){
-      //  alert ('schoolController includeContentLoaded');
-    });
-
-
     $scope.courseAsideTemplate = '../courseAside.html';
     $scope.studentAsideTemplate = '../studentAside.html';
     $scope.mainTemplate = '../schoolMain.html';
@@ -52,23 +47,13 @@ schoolApp.controller('schoolController', function handleSchoolLoad($rootScope,
        // $scope.mainTemplate = '../view-course.html';
         $templateRequest("../view-course.html").then(function(html){
             var template = $compile(html)($scope);
-            angular.element(document.querySelector('#mainPlaceHolder')).empty().
-            append(template)(function(data) {
+            angular.element(document.querySelector('#mainPlaceHolder')).empty().append(template);
+            angular.element(function () {
                 $rootScope.$broadcast('handleCourseSelection', {course: course, studentsForCourse: $scope.studentsForCourse});
             });
+        
         });
     }
-
-    // $templateRequest("../view-course.html").then(function(html){
-    //     var template = $compile(html)($scope);
-    //     angular.element(document.querySelector('#mainPlaceHolder')).empty().append(template);
-    //     $rootScope.$broadcast('handleCourseSelection', {course: course, studentsForCourse: $scope.studentsForCourse});
-    // })
-
-
-
-    // $.ajax("templates/navigation.html").done(function(data) {  });
-
 
     function buildStudentsForCourse(course) { //TODO: move to service because connects 2 separate controllers
         var students = course.studentIDs.split(","); 

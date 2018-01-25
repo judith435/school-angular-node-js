@@ -8,11 +8,6 @@ schoolApp.controller('viewCourseController', function($rootScope,
     courseService, 
     canvasService) {
 
-    $rootScope.$on('$includeContentLoaded', function(){
-     //   alert ('viewCourseController includeContentLoaded');
-    });
-    
-
     setTemplate($scope.course, $scope.studentsForCourse);
 
     $rootScope.$on('handleCourseSelection', function(event, parms) {  
@@ -24,12 +19,11 @@ schoolApp.controller('viewCourseController', function($rootScope,
         $scope.selectedCourse = course;
         $rootScope.courseSummary = $scope.selectedCourse.courseName + ', ' + $scope.selectedCourse.numberOfStudentsForCourse + ' students';
 
-        var drawingCanvas = document.getElementById('canvasCourse');
-        if (drawingCanvas) {
-        canvasService.setCanvas(drawingCanvas,  
-                                configSettings.courseImagePath + $scope.selectedCourse.id, 
-                                'regular'); 
-        }
+        angular.element(function () {
+            var drawingCanvas = document.getElementById('canvasCourse');
+            canvasService.setCanvas(drawingCanvas, configSettings.courseImagePath + $scope.selectedCourse.id,'regular'); 
+            canvasService.loadCanvasList(studentsForCourse, 'canvas-student-for-course-' , configSettings.studentImagePath, 'small'); 
+        });
         console.log(JSON.stringify(studentsForCourse));
     }
 

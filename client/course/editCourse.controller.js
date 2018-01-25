@@ -1,7 +1,8 @@
 schoolApp.controller('editCourseController', function($rootScope, $scope, $timeout, configSettings, courseService, canvasService) {
-    //$scope.course = $scope.updateCourse ?  $scope.course : '' ;
 
-    //alert('@@@@@@ in editCourseController $scope.course=' + $scope.course + '===');
+    angular.element(function () {
+        var drawingCanvas = document.getElementById('canvasCourse');
+        canvasService.setCanvas(drawingCanvas, configSettings.courseImagePath + $scope.selectedCourse.id,'regular'); 
+    });
 
-   // console.log('@@@@@@ in editCourseController');
 });
