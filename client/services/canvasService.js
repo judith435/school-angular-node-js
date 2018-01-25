@@ -18,29 +18,19 @@ schoolApp.service('canvasService', function() {
     }
 
     this.loadCanvasList =  function (items, canvasID , imagePath, size) {
-        //items.forEach(function (item) {
-            // var drawingCanvas = document.getElementById(canvasID + item.id);
-        //items['studentsForCourse'][0]   items['studentsForCourse'].length
-        for (let i = 0; i < items.length; i++) {
-            var drawingCanvas = document.getElementById(canvasID + items[i].id);
-                        //  console.log('id:  ' + item.id + '  drawingCanvas' + JSON.stringify(drawingCanvas));
-            self.setCanvas(drawingCanvas, imagePath + items[i].id, size);
-        }
-       // });
+        items.forEach(function (item) {
+            var drawingCanvas = document.getElementById(canvasID + item.id);
+            self.setCanvas(drawingCanvas, imagePath + item.id, size);
+        });
     }
 
     this.loadCanvasListX =  function (items, objName ,canvasID , imagePath, size) {
-        //items.forEach(function (item) {
-            // var drawingCanvas = document.getElementById(canvasID + item.id);
-        //items['studentsForCourse'][0]   items['studentsForCourse'].length
         for (let i = 0; i < items[objName].length; i++) {
             var drawingCanvas = document.getElementById(canvasID + items[objName][i].id);
-                        //  console.log('id:  ' + item.id + '  drawingCanvas' + JSON.stringify(drawingCanvas));
             if (drawingCanvas) {            
                self.setCanvas(drawingCanvas, imagePath + items[i].id, size);
             }
         }
-       // });
     }
 
 
