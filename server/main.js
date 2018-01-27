@@ -31,6 +31,7 @@ app.get('/', function (req, res) {
 
 app.get('/course', apiCourse.getCourses);
 app.get('/student', apiStudent.getStudents);
+app.put('/course', apiCourse.updateCourse);
 
 // app.get('/product/duplicate', apiProducts.checkDuplicateProduct);
 // app.get('/supplier', apiSuppliers.getSuppliers);

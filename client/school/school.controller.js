@@ -83,4 +83,10 @@ schoolApp.controller('schoolController', function handleSchoolLoad($rootScope,
         });
        // console.log(JSON.stringify($scope.studentsForCourse));
     }
+
+    $rootScope.$on('refreshAfterCourseStudentUpdate', function(event) {  
+        getCourses();
+        getStudents();
+    });
+
 });

@@ -9,5 +9,15 @@ function getCourses(req, res) {
     })
 }
 
+function updateCourse(req, res) {
+    console.log('>>> courseAPI: ' + req.query);
+    courseCtrl.updateCourse(req, function(err, result) {
+        if (err) {
+            res.end('Sorry Dude! '+ err);
+        }
+        res.end(JSON.stringify(result));
+    })
+}
 
 module.exports.getCourses = getCourses;
+module.exports.updateCourse = updateCourse;

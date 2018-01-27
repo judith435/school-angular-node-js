@@ -4,7 +4,7 @@ schoolApp.service('courseService', function($http, $q) {
         $http.get(configSettings.schoolApi + '/course',{}).then(success, error);
     }
 
-    this.updateCourse = function(course, success, error) {
+    this.updateCourse = function(configSettings, course, success, error) {
         $http({
             url: configSettings.schoolApi + '/course',
             method: 'PUT',

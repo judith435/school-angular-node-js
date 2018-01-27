@@ -72,7 +72,7 @@ schoolApp.controller('editCourseController', function($rootScope, $scope, $timeo
 
         //let index = 0;
         var course = {
-            courseID: $scope.course.id,
+            id: $scope.course.id,
             courseName: $scope.course.courseName,
             courseDescription: $scope.course.courseDescription
         };
@@ -85,8 +85,11 @@ schoolApp.controller('editCourseController', function($rootScope, $scope, $timeo
         //     return;
         // } 
 
-        courseService.updateCourse(course, function(response) {
+        courseService.updateCourse(configSettings, course, function(response) {
             alert  (JSON.stringify(response.data));
+            if (response.data === 'course updated successfully') {
+               $rootScope.$broadcast('refreshAfterCourseStudentUpdate', {});
+            }
             //$scope.message = (JSON.stringify(response.data));
         });
         // $scope.errorsFound = false;

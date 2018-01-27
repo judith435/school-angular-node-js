@@ -16,6 +16,29 @@ function getCourses(callback) {
     });
 }
 
+function updateCourse(course, callback) { 
+
+    console.log('>>> courseBL: ' + JSON.stringify(course));  
+
+    const spParms = []; 
+    
+    spParms.push(new parmObject.spParm(course.id, false));
+    spParms.push(new parmObject.spParm(course.courseName, true));
+    spParms.push(new parmObject.spParm(course.courseDescription, true));
+
+    console.log('!!! in bl  spParms: ' + JSON.stringify(spParms));
+    dal.executeQuery('coding-school', 'update_course', spParms, function(err, rows) {
+        if (err) {
+            callback(err);
+        }
+        callback(null, 'course updated successfully');
+    });
+}
+
+
+
 module.exports.course = {
-    getCourses: getCourses
+    getCourses: getCourses,
+    updateCourse: updateCourse
+
 }
