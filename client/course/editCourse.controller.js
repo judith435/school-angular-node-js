@@ -1,7 +1,7 @@
 schoolApp.controller('editCourseController', function($rootScope, $scope, $timeout, configSettings, courseService, canvasService) {
-    if ($rootScope.updateCourse) {
-        sessionStorage.setItem("courseBeforeChange", JSON.stringify($scope.course));   
-    }
+    // if ($rootScope.updateCourse) {
+    //     sessionStorage.setItem("courseBeforeChange", JSON.stringify($scope.course));   
+    // }
 
     $scope.form = {
         name : "frmCUD", 
@@ -40,6 +40,10 @@ schoolApp.controller('editCourseController', function($rootScope, $scope, $timeo
     angular.element(function () {
         var drawingCanvas = document.getElementById('canvasCourse');
         canvasService.setCanvas(drawingCanvas, configSettings.courseImagePath + $scope.selectedCourse.id,'regular'); 
+        if ($rootScope.updateCourse) {
+            sessionStorage.setItem("courseBeforeChange", JSON.stringify($scope.course));   
+        }
+
     });
 
 
@@ -68,6 +72,7 @@ schoolApp.controller('editCourseController', function($rootScope, $scope, $timeo
 
         //let index = 0;
         var course = {
+            courseID: $scope.course.id,
             courseName: $scope.course.courseName,
             courseDescription: $scope.course.courseDescription
         };
@@ -80,9 +85,10 @@ schoolApp.controller('editCourseController', function($rootScope, $scope, $timeo
         //     return;
         // } 
 
-        // productService.addProduct(product, function(response) {
-        //     $scope.message = (JSON.stringify(response.data));
-        // });
+        courseService.updateCourse(course, function(response) {
+            alert  (JSON.stringify(response.data));
+            //$scope.message = (JSON.stringify(response.data));
+        });
         // $scope.errorsFound = false;
         // $scope.duplicateFound = false;
     }  

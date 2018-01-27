@@ -4,6 +4,13 @@ schoolApp.service('courseService', function($http, $q) {
         $http.get(configSettings.schoolApi + '/course',{}).then(success, error);
     }
 
+    this.updateCourse = function(course, success, error) {
+        $http({
+            url: configSettings.schoolApi + '/course',
+            method: 'PUT',
+            params: { course: course }
+        }).then(success, error);
+    }
 
     function error(response) {
         alert("Sorry Error occured in courseService: " + JSON.stringify(response));
