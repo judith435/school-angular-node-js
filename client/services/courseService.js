@@ -47,7 +47,7 @@ schoolApp.service('courseService', function($http, $q) {
             studentsForCourse.push({id:studentID, name:student[0].studentName});
           //  success = studentsForCourse;
         })//.then(success, error);;
-
+        success(studentsForCourse);
         // var deferral = $q.defer(); 
         // deferral.resolve({studentsForCourse});
         // return deferral.promise;
