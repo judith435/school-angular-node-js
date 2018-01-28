@@ -70,8 +70,8 @@ schoolApp.controller('editCourseController', function($rootScope, $scope, $timeo
             $scope.errorsFound = $scope.duplicateCourse_errorMessage !== '';
         }
 
-        $scope.courseName_errorMessage = !$scope.course.courseName ? 'Course Name required' : '';
-        $scope.errorsFound = $scope.courseName_errorMessage !== '' || $scope.errorsFound;
+       // $scope.courseName_errorMessage = !$scope.course.courseName ? 'Course Name required' : '';
+      //  $scope.errorsFound = $scope.courseName_errorMessage !== '' || $scope.errorsFound;
 
         if ($scope.errorsFound) { return; }
         alert ('no errors found!!!');

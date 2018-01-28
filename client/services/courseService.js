@@ -10,11 +10,12 @@ schoolApp.service('courseService', function($http, $q) {
     
         $http.post(configSettings.schoolApi + '/course', fd,
         {
-            withCredentials: true,
+         //   withCredentials: true,
             headers: {'Content-Type': undefined },
             transformRequest: angular.identity
         }).then(success, error); 
     }
+
 
     this.updateCourse = function(configSettings, course, courseImage, success, error) {
         $http({
@@ -23,6 +24,7 @@ schoolApp.service('courseService', function($http, $q) {
             params: { course: course } 
         }).then(success, error);
     }
+
 
     function error(response) {
         alert("Sorry Error occured in courseService: " + JSON.stringify(response));
