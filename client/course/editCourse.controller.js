@@ -46,6 +46,12 @@ schoolApp.controller('editCourseController', function($rootScope, $scope, $timeo
 
     });
 
+    $scope.uploadedCourseImage = function(fu) {
+        alert('in uploadedCourseImage');
+        $scope.$apply(function($scope) {
+          $scope.courseImage = fu.files;         
+        });
+    }
 
     $scope.saveCourse = function()  {
         $scope.errorsFound = false;
@@ -83,15 +89,26 @@ schoolApp.controller('editCourseController', function($rootScope, $scope, $timeo
         //     $scope.errorsFound = true;
         //     $scope.duplicateProductErrorMessage = 'product with same name, supplier and category already exists';
         //     return;
-        // } 
-
-        courseService.updateCourse(configSettings, course, function(response) {
+        // }
+        if ($rootScope.updateCourse) {
+            courseService.updateCourse(configSettings, course, $scope.courseImage, function(response) {
             alert  (JSON.stringify(response.data));
-            if (response.data === 'course updated successfully') {
-               $rootScope.$broadcast('refreshAfterCourseStudentUpdate', {});
-            }
-            //$scope.message = (JSON.stringify(response.data));
-        });
+                if (response.data === 'course updated successfully') {
+                    $rootScope.$broadcast('refreshAfterCourseStudentUpdate', {});
+                }
+                    //$scope.message = (JSON.stringify(response.data));
+            });
+        } 
+        else {
+            courseService.addCourse(configSettings, course, $scope.courseImage, function(response) {
+                //courseService.updateCourse(configSettings, course, $scope.courseImage, function(response) {
+                alert  (JSON.stringify(response.data));
+                if (response.data === 'course updated successfully') {
+                   $rootScope.$broadcast('refreshAfterCourseStudentUpdate', {});
+                }
+                //$scope.message = (JSON.stringify(response.data));
+            });
+        }
         // $scope.errorsFound = false;
         // $scope.duplicateFound = false;
     }  
@@ -100,3 +117,5 @@ schoolApp.controller('editCourseController', function($rootScope, $scope, $timeo
 
 
 });
+
+

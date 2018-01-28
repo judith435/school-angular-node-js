@@ -4,11 +4,23 @@ schoolApp.service('courseService', function($http, $q) {
         $http.get(configSettings.schoolApi + '/course',{}).then(success, error);
     }
 
-    this.updateCourse = function(configSettings, course, success, error) {
+    this.addCourse = function(configSettings, course, courseImage, success, error) {
+        var fd = new FormData();
+        fd.append("courseImage", courseImage);
+    
+        $http.post(configSettings.schoolApi + '/course', fd,
+        {
+            withCredentials: true,
+            headers: {'Content-Type': undefined },
+            transformRequest: angular.identity
+        }).then(success, error); 
+    }
+
+    this.updateCourse = function(configSettings, course, courseImage, success, error) {
         $http({
             url: configSettings.schoolApi + '/course',
             method: 'PUT',
-            params: { course: course }
+            params: { course: course } 
         }).then(success, error);
     }
 
