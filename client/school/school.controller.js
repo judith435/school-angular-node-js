@@ -42,9 +42,17 @@ schoolApp.controller('schoolController', function handleSchoolLoad($rootScope,
         $scope.studentsForCourse = [];
         $scope.course = course;
         if (course.studentIDs !== '') {
-            buildStudentsForCourse(course);
-            // courseService.buildStudentsForCourse(course, $scope.students).then(function(studentsForCourse) {
-            //     $scope.studentsForCourse = studentsForCourse;
+          //  buildStudentsForCourse(course);
+            courseService.buildStudentsForCourse(course, $scope.students, function(studentsForCourse) {
+                $scope.studentsForCourse = studentsForCourse;
+            });
+
+            // courseService.updateCourse(configSettings, course, $scope.courseImage, function(response) {
+              
+            //     if (response.data === 'course updated successfully') {
+            //         $rootScope.$broadcast('refreshAfterCourseStudentUpdate', {});
+            //     }
+            //         //$scope.message = (JSON.stringify(response.data));
             // });
         }
         $templateRequest("../view-course.html").then(function(html){

@@ -10,13 +10,20 @@ schoolApp.service('courseService', function($http, $q) {
     
         $http.post(configSettings.schoolApi + '/course', fd,
         {
+            contentType: false,
+            processData: false,
          //   withCredentials: true,
-            headers: {'Content-Type': undefined },
-            transformRequest: angular.identity
+           headers: {'Content-Type': 'application/x-www-form-urlencoded' }//,
+         //   transformRequest: angular.identity
         }).then(success, error); 
     }
 
-
+    // type: verb,
+    // url: app.schoolApi,
+    // data: ajaxData,
+    // contentType: verb === "POST" ? false : undefined,
+    // processData: verb === "POST" ? false : undefined 
+  //courseService.updateCourse(configSettings, course, $scope.courseImage, function(response) {
     this.updateCourse = function(configSettings, course, courseImage, success, error) {
         $http({
             url: configSettings.schoolApi + '/course',
@@ -30,7 +37,7 @@ schoolApp.service('courseService', function($http, $q) {
         alert("Sorry Error occured in courseService: " + JSON.stringify(response));
     }
 
-    this.buildStudentsForCourse = function(course, students) {
+    this.buildStudentsForCourse = function(course, students, success) {
         var studentsForCourse = [];
         var studentsIDs = course.studentIDs.split(","); 
         studentsIDs.forEach(function (studentID) {
@@ -38,11 +45,12 @@ schoolApp.service('courseService', function($http, $q) {
                 return e.id ===  parseInt(studentID); 
             });
             studentsForCourse.push({id:studentID, name:student[0].studentName});
-        });
+          //  success = studentsForCourse;
+        })//.then(success, error);;
 
-        var deferral = $q.defer(); 
-        deferral.resolve({studentsForCourse});
-        return deferral.promise;
+        // var deferral = $q.defer(); 
+        // deferral.resolve({studentsForCourse});
+        // return deferral.promise;
     }
 
 });

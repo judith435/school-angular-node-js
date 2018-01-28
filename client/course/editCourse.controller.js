@@ -92,7 +92,7 @@ schoolApp.controller('editCourseController', function($rootScope, $scope, $timeo
         // }
         if ($rootScope.updateCourse) {
             courseService.updateCourse(configSettings, course, $scope.courseImage, function(response) {
-            alert  (JSON.stringify(response.data));
+              
                 if (response.data === 'course updated successfully') {
                     $rootScope.$broadcast('refreshAfterCourseStudentUpdate', {});
                 }
