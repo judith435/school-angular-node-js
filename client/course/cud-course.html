@@ -45,7 +45,7 @@
             <textarea  class="form-control" 
                     placeholder="Enter new Course description"
                     ng-model=course.courseDescription maxlength="255"></textarea >
-            <label class="validationError">{{courseDescription.errorMessage}}</label>     
+            <label class="validationError">{{courseDescription_errorMessage}}</label>     
         </div>
     </div>
     <div class="form-group row">
@@ -57,9 +57,9 @@
     <div class="form-group row">
         <span class="col-xs-12 col-sm-2 col-md-2 col-lg-2 col-form-label text-left"></span>
         <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
-            <input type="file" class="btn btn-info pull-left" id="courseImage" name="courseImage" onchange="angular.element(this).scope().uploadedCourseImage(this)">
-            <button class="btn btn-default pull-left" id="btnCancel" type="button">Cancel</button>
-        </div>
+            <input type="file" class="btn btn-info pull-left" ng-model=courseImage id="courseImage" onchange="angular.element(this).scope().uploadedCourseImage(this)">
+            <button class="btn btn-default pull-left" id="btnCancel" ng-click="clearImage()" type="button">Cancel</button>
+        </div> 
     </div>
     <div id="cbDeleteImage" class="form-group row">
         <span class="col-xs-12 col-sm-2 col-md-2 col-lg-2 col-form-label"></span>
@@ -72,10 +72,10 @@
         <label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 col-form-label text-left"></label>
         <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
             <figure>
-               <canvas id="canvasCourse"  class="img-fluid"  width="80" height="100" ></canvas>
+               <canvas id="canvasCourse"  class="img-fluid image-margin"  width="80" height="100" ></canvas>
                <figcaption>image dimensions: width="80px" height="100px"</figcaption>
             </figure> 
-            <label class="validationError">{{image.errorMessage}}</label>     
+            <label class="validationError">{{courseImage_errorMessage}}</label>     
         </div>
     </div>
     <div class="form-group row text-left">

@@ -19,16 +19,12 @@
     <div  class="col-xs-10 col-sm-10 col-md-9 col-lg-9 text-left main_table">
         <table class="table table-hover table-responsive">
             <tbody> 
-                <tr ng-repeat="studentForCourse in studentsForCourse">
-                    <td>
-                        <div class="info-row-minor">
-                            <canvas id=canvas-student-for-course-{{studentForCourse.id}} class="img-fluid info-minor" width="40" height="50"></canvas>  
-                            <div class="info-container">
-                                <label class="text-left">{{studentForCourse.name}}</label>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
+                <div class="info-row-minor" ng-repeat="studentForCourse in studentsForCourse">
+                    <canvas id=canvas-student-for-course-{{studentForCourse.id}} class="img-fluid info-minor" width="40" height="50"></canvas>  
+                    <div class="info-container">
+                        <label class="text-left">{{studentForCourse.name}}</label>
+                    </div>
+                </div>
             </tbody>
         </table>
     </div>

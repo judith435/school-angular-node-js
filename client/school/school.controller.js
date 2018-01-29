@@ -5,13 +5,17 @@ schoolApp.controller('schoolController', function handleSchoolLoad($rootScope,
     configSettings, 
     courseService, 
     studentService, 
-    canvasService) {
+    imageService) {
 
     $scope.courseAsideTemplate = '../courseAside.html';
     $scope.studentAsideTemplate = '../studentAside.html';
     $scope.mainTemplate = '../schoolMain.html';
-    getCourses();
-    getStudents();
+    buildSchoolAside();
+
+    function buildSchoolAside() {
+            getCourses();
+            getStudents();
+    }    
 
     function getCourses() {
         courseService.getCourses(configSettings, function(courses) {
@@ -32,8 +36,8 @@ schoolApp.controller('schoolController', function handleSchoolLoad($rootScope,
     }
 
     $scope.$on('ngSchoolRepeatFinished', function(ngSchoolRepeatFinishedEvent) {
-        canvasService.loadCanvasList($scope.courses, 'canvas-course-' , configSettings.courseImagePath, 'schoolAside'); 
-        canvasService.loadCanvasList($scope.students, 'canvas-student-' , configSettings.studentImagePath, 'schoolAside'); 
+        imageService.loadCanvasList($scope.courses, 'canvas-course-' , configSettings.courseImagePath, 'schoolAside'); 
+        imageService.loadCanvasList($scope.students, 'canvas-student-' , configSettings.studentImagePath, 'schoolAside'); 
     });
 
 
@@ -42,18 +46,9 @@ schoolApp.controller('schoolController', function handleSchoolLoad($rootScope,
         $scope.studentsForCourse = [];
         $scope.course = course;
         if (course.studentIDs !== '') {
-          //  buildStudentsForCourse(course);
             courseService.buildStudentsForCourse(course, $scope.students, function(studentsForCourse) {
                 $scope.studentsForCourse = studentsForCourse;
             });
-
-            // courseService.updateCourse(configSettings, course, $scope.courseImage, function(response) {
-              
-            //     if (response.data === 'course updated successfully') {
-            //         $rootScope.$broadcast('refreshAfterCourseStudentUpdate', {});
-            //     }
-            //         //$scope.message = (JSON.stringify(response.data));
-            // });
         }
         $templateRequest("../view-course.html").then(function(html){
             var template = $compile(html)($scope);
@@ -64,11 +59,9 @@ schoolApp.controller('schoolController', function handleSchoolLoad($rootScope,
         });
     }
 
-
     $scope.addCourse = function(){
        $rootScope.updateCourse = false;
-       $scope.course = '';
-       //$scope.mainTemplate = '../cud-course.html';
+       $scope.course = {};
         $templateRequest("../cud-course.html").then(function(html){
             var template = $compile(html)($scope);
             angular.element(document.querySelector('#mainPlaceHolder')).empty().append(template);
@@ -79,22 +72,8 @@ schoolApp.controller('schoolController', function handleSchoolLoad($rootScope,
         // alert(JSON.stringify(student));
     }
 
-    function buildStudentsForCourse(course) { //TODO: move to service because connects 2 separate controllers
-        var students = course.studentIDs.split(","); 
-        students.forEach(function (studentID) {
-            let student = $.grep( $scope.students, function(e){ 
-                return e.id ===  parseInt(studentID); 
-            });
-            $scope.studentsForCourse.push({id:studentID, 
-                name:student[0].studentName,
-                imagePath: configSettings.studentImagePath + studentID + '.jpg' });
-        });
-       // console.log(JSON.stringify($scope.studentsForCourse));
-    }
-
     $rootScope.$on('refreshAfterCourseStudentUpdate', function(event) {  
-        getCourses();
-        getStudents();
+        buildSchoolAside();
     });
 
 });

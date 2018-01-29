@@ -6,7 +6,7 @@ schoolApp.controller('viewCourseController', function($rootScope,
     $timeout, 
     configSettings, 
     courseService, 
-    canvasService) {
+    imageService) {
 
     setTemplate($scope.course, $scope.studentsForCourse);
 
@@ -21,16 +21,14 @@ schoolApp.controller('viewCourseController', function($rootScope,
 
         angular.element(function () {
             var drawingCanvas = document.getElementById('canvasCourse');
-            canvasService.setCanvas(drawingCanvas, configSettings.courseImagePath + $scope.selectedCourse.id,'regular'); 
-            canvasService.loadCanvasList(studentsForCourse, 'canvas-student-for-course-' , configSettings.studentImagePath, 'small'); 
-            // canvasService.loadCanvasListX(studentsForCourse, 'studentsForCourse','canvas-student-for-course-' , configSettings.studentImagePath, 'small'); 
+            imageService.setCanvas(drawingCanvas, configSettings.courseImagePath + $scope.selectedCourse.id,'regular'); 
+            imageService.loadCanvasList(studentsForCourse, 'canvas-student-for-course-' , configSettings.studentImagePath, 'small'); 
         });
         console.log(JSON.stringify(studentsForCourse));
     }
 
     $scope.editCourse = function(){
         $scope.course = $scope.selectedCourse;
-       // $scope.mainTemplate = '../cud-course.html'; 
         $templateRequest("../cud-course.html").then(function(html){
             var template = $compile(html)($scope);
             angular.element(document.querySelector('#mainPlaceHolder')).empty().append(template);
