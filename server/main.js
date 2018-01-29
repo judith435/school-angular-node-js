@@ -35,9 +35,12 @@ app.get('/', function (req, res) {
 });
 
 app.get('/course', apiCourse.getCourses);
-app.get('/student', apiStudent.getStudents);
+app.get('/course/duplicate', apiCourse.checkDuplicateCourse);
 app.post('/course', apiCourse.addCourse);
 app.put('/course', apiCourse.updateCourse);
+
+
+app.get('/student', apiStudent.getStudents);
 
 // app.post('/upload', function(req, res) {
 //     if (!req.files)

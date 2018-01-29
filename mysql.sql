@@ -126,7 +126,10 @@ USE `coding-school`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `check_course_exists`(IN courseName VARCHAR(45))
 BEGIN
 
-	SELECT id FROM courses WHERE BINARY name = courseName;
+	select ifnull((	select id 
+					from courses 
+					where binary name = courseName) ,-1) as duplicateCourseID;
+
     
 END$$
 

@@ -16,6 +16,24 @@ function getCourses(callback) {
     });
 }
 
+function checkDuplicateCourse(course, callback) { 
+
+    console.log('>>> courseBL: ' + JSON.stringify(course));  
+
+    const spParms = []; 
+    
+    spParms.push(new parmObject.spParm(course.courseName, true));
+
+    console.log('!!! in bl  spParms: ' + JSON.stringify(spParms));
+    dal.executeQuery('coding-school', 'check_course_exists', spParms, function(err, rows) {
+        if (err) {
+            callback(err);
+        }
+        callback(null, 'course updated successfully');
+    });
+}
+
+
 function updateCourse(course, callback) { 
 
     console.log('>>> courseBL: ' + JSON.stringify(course));  
@@ -39,6 +57,7 @@ function updateCourse(course, callback) {
 
 module.exports.course = {
     getCourses: getCourses,
+    checkDuplicateCourse: checkDuplicateCourse,
     updateCourse: updateCourse
 
 }

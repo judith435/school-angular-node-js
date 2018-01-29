@@ -4,6 +4,14 @@ schoolApp.service('courseService', function($http, $q) {
         $http.get(configSettings.schoolApi + '/course',{}).then(success, error);
     }
 
+    this.checkDuplicateCourse = function (configSettings, course, success, error) { 
+        $http({
+            url: configSettings.schoolApi + '/course/duplicate', 
+            method: 'GET',
+            params: { course: course }
+         });
+    }
+
     this.addCourse = function(configSettings, course, courseImage, success, error) {
         var fd = new FormData();
         fd.append("courseImage", courseImage);

@@ -54,7 +54,7 @@ schoolApp.controller('editCourseController', function($rootScope, $scope, $timeo
     }
 
     $scope.clearImage = function()  {
-        if ($scope.courseImage !== undefined) {
+        if ($scope.courseImage) {
             angular.element("#courseImage").val(null);
             $scope.courseImage = null;
             var drawingCanvas = document.getElementById('canvasCourse');
@@ -63,7 +63,6 @@ schoolApp.controller('editCourseController', function($rootScope, $scope, $timeo
     }
 
     $scope.saveCourse = function()  {
-        validateInput();
 
         // $scope.form.fields.forEach(function(field) {
         //     field.errorMessage = (!field.content)  && field.required ? field.description + ' required' : '';
@@ -73,9 +72,6 @@ schoolApp.controller('editCourseController', function($rootScope, $scope, $timeo
        // $scope.courseName_errorMessage = !$scope.course.courseName ? 'Course Name required' : '';
       //  $scope.errorsFound = $scope.courseName_errorMessage !== '' || $scope.errorsFound;
 
-        if ($scope.errorsFound) { return; }
-        alert ('no errors found!!!');
-
         //let index = 0;
         var course = {
             id: $scope.course.id,
@@ -83,13 +79,12 @@ schoolApp.controller('editCourseController', function($rootScope, $scope, $timeo
             courseDescription: $scope.course.courseDescription
         };
 
-        // $scope.duplicateProductErrorMessage = '';
-        // if (!productService.checkDuplicateProduct(product))
-        // {
-        //     $scope.errorsFound = true;
-        //     $scope.duplicateProductErrorMessage = 'product with same name, supplier and category already exists';
-        //     return;
-        // }
+        validateInput();
+
+        if ($scope.errorsFound) { return; }
+        alert ('no errors found!!!');
+
+
         if ($rootScope.updateCourse) {
             courseService.updateCourse(configSettings, course, $scope.courseImage, function(response) {
               
@@ -133,17 +128,25 @@ schoolApp.controller('editCourseController', function($rootScope, $scope, $timeo
         $scope.courseDescription_errorMessage = !$scope.course.courseDescription ? 'Course Description required' : '';
         $scope.errorsFound = $scope.courseDescription_errorMessage !== '' || $scope.errorsFound;
 
-        var extension = $scope.courseImage[0].name.split(".").pop().toLowerCase();
-        $scope.courseImage_errorMessage = $.inArray(extension, ['jpg', 'jpeg', 'png', 'gif']) === -1 ? 'Valid extensions: jpg, jpeg, png or gif' : '';
-        $scope.errorsFound = $scope.courseImage_errorMessage !== '' || $scope.errorsFound;
+        if ($scope.courseImage) {
 
-        if ($scope.courseImage_errorMessage !== '') {
-            return;
+            var extension = $scope.courseImage[0].name.split(".").pop().toLowerCase();
+            $scope.courseImage_errorMessage = $.inArray(extension, ['jpg', 'jpeg', 'png', 'gif']) === -1 ? 'Valid extensions: jpg, jpeg, png or gif' : '';
+            $scope.errorsFound = $scope.courseImage_errorMessage !== '' || $scope.errorsFound;
+    
+            if ($scope.courseImage_errorMessage !== '') {
+                return;
+            }
+    
+            $scope.courseImage_errorMessage = $scope.courseImage[0].size > 5000000 ? "Image larger than 5MB - actual size: " + $scope.courseImage[0].size + " bytes" : '';
+            $scope.errorsFound = $scope.courseImage_errorMessage !== '' || $scope.errorsFound;
         }
 
-        $scope.courseImage_errorMessage = $scope.courseImage[0].size > 5000000 ? "Image larger than 5MB - actual size: " + $scope.courseImage[0].size + " bytes" : '';
-        $scope.errorsFound = $scope.courseImage_errorMessage !== '' || $scope.errorsFound;
-
+        if (!courseService.checkDuplicateCourse(configSettings, $scope.course))
+        {
+            $scope.errorsFound = true;
+            $scope.duplicateCourse_errorMessage = 'course with same name already exists';
+        }
     }    
 
 

@@ -9,6 +9,16 @@ function getCourses(req, res) {
     })
 }
 
+function checkDuplicateCourse(req, res) {
+    console.log('>>> courseAPI: ' + req.query); 
+    courseCtrl.checkDuplicateCourse(req, function(err, courseID) {
+        if (err) {
+            res.end('Sorry Dude! '+ err);
+        }
+        res.end(JSON.stringify(courseID));
+    })
+}
+
 function addCourse(req, res) {
     if (!req.files) {
         return res.status(400).send('No files were uploaded.');
@@ -61,5 +71,6 @@ function updateCourse(req, res) {
 }
 
 module.exports.getCourses = getCourses;
+module.exports.checkDuplicateCourse = checkDuplicateCourse;
 module.exports.addCourse = addCourse;
 module.exports.updateCourse = updateCourse;
