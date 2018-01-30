@@ -42,8 +42,6 @@ function executeQuery(dbName, spName, spParms, callback) {
             callback(err);
         } 
         else {
-            var t = rows[0];
-            var c = rows[1];
             callback(null, rows)
 
         }

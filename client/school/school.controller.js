@@ -3,7 +3,7 @@ schoolApp.controller('schoolController', function handleSchoolLoad($rootScope,
     $templateRequest,
     $compile, 
     configSettings, 
-    courseService, 
+    courseService,
     studentService, 
     imageService) {
 
@@ -45,11 +45,10 @@ schoolApp.controller('schoolController', function handleSchoolLoad($rootScope,
 
         $scope.studentsForCourse = [];
         $scope.course = course;
-        if (course.studentIDs !== '') {
-            courseService.buildStudentsForCourse(course, $scope.students, function(studentsForCourse) {
-                $scope.studentsForCourse = studentsForCourse;
-            });
-        }
+        courseService.buildStudentsForCourse(course, $scope.students, function(studentsForCourse) {
+            $scope.studentsForCourse = studentsForCourse;
+        });
+        
         $templateRequest("../view-course.html").then(function(html){
             var template = $compile(html)($scope);
             angular.element(document.querySelector('#mainPlaceHolder')).empty().append(template);

@@ -1,4 +1,11 @@
-schoolApp.controller('editCourseController', function($rootScope, $scope, $timeout, configSettings, courseService, imageService) {
+schoolApp.controller('editCourseController', function($rootScope, 
+    $scope, 
+    $timeout, 
+    $templateRequest,
+    $compile, 
+    configSettings, 
+    courseService, 
+    imageService) {
     // if ($rootScope.updateCourse) {
     //     sessionStorage.setItem("courseBeforeChange", JSON.stringify($scope.course));   
     // }
@@ -104,8 +111,18 @@ schoolApp.controller('editCourseController', function($rootScope, $scope, $timeo
                 //$scope.message = (JSON.stringify(response.data));
             });
         }
-        // $scope.errorsFound = false;
-        // $scope.duplicateFound = false;
+        
+        courseService.buildStudentsForCourse($scope.course, $scope.students, function(studentsForCourse) {
+            $scope.studentsForCourse = studentsForCourse;
+        });
+
+        $templateRequest("../view-course.html").then(function(html){
+            var template = $compile(html)($scope);
+            angular.element(document.querySelector('#mainPlaceHolder')).empty().append(template);
+            angular.element(function () {
+                $rootScope.$broadcast('handleCourseSelection', {course: $scope.course, studentsForCourse: $scope.studentsForCourse});
+            });
+        });
     }  
 
     function validateInput() {
@@ -142,11 +159,16 @@ schoolApp.controller('editCourseController', function($rootScope, $scope, $timeo
             $scope.errorsFound = $scope.courseImage_errorMessage !== '' || $scope.errorsFound;
         }
 
-        if (!courseService.checkDuplicateCourse(configSettings, $scope.course))
-        {
-            $scope.errorsFound = true;
-            $scope.duplicateCourse_errorMessage = 'course with same name already exists';
+        if ($scope.courseName_errorMessage !== '' ) { //course name missing - no point checking duplicate cours
+            return;
         }
+
+        courseService.checkDuplicateCourse(configSettings, $scope.course, function(response) {
+            let duplicateCourseID = parseInt(response.data);
+            $scope.errorsFound = duplicateCourseID !== -1;
+            $scope.duplicateCourse_errorMessage =  duplicateCourseID !== -1 
+                    ? 'course with same name already exists (courseID: ' + duplicateCourseID + ')' : '' ;
+        });
     }    
 
 

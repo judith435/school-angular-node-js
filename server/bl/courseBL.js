@@ -29,7 +29,11 @@ function checkDuplicateCourse(course, callback) {
         if (err) {
             callback(err);
         }
-        callback(null, 'course updated successfully');
+
+        rows[0].forEach(function (row) {
+            callback(null, row.duplicateCourseID);
+        });
+
     });
 }
 
